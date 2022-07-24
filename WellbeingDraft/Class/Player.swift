@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+struct Player: Codable{
+    var currentDay: Int
+    var currentTimeframe: Int
+    var progressDevelopment: Int
+    var statsKnowledge: Int
+    var statsSocial: Int
+    var statsSickness: Int
+    var statsStress: Int
+    
+    
+    //TODO: trackers, such as action use count
+}

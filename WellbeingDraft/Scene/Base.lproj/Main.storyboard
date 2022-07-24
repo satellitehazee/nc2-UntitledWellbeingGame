@@ -27,8 +27,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DL-xd-aGy">
-                                        <rect key="frame" x="345" y="68" width="73" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day x - timeframe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DL-xd-aGy">
+                                        <rect key="frame" x="267" y="68" width="230" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="textColor"/>
@@ -239,7 +239,7 @@ New Line 1</string>
                         <outlet property="actionActButton" destination="3mB-KY-h0J" id="26g-Eu-fm6"/>
                         <outlet property="actionSelectedApp" destination="T9D-n3-ZPd" id="BnR-vy-1dK"/>
                         <outlet property="actionTableView" destination="HTX-Ly-PdY" id="hBw-lz-oph"/>
-                        <outlet property="headerDayCount" destination="3DL-xd-aGy" id="ena-P9-ebx"/>
+                        <outlet property="headerTimeIndicator" destination="3DL-xd-aGy" id="cBx-iF-C6D"/>
                         <outlet property="headerTitle" destination="Nfs-tI-0QE" id="4pD-nD-9jj"/>
                         <outlet property="logTextView" destination="2x5-aY-a3D" id="o5P-EN-x8x"/>
                         <outlet property="progressBarDevelopment" destination="edQ-lv-Nyz" id="Yya-TK-dJL"/>

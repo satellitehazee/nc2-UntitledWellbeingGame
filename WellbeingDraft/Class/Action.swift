@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+struct Action: Codable {
+    var actionName: String
+    var progressChangeDevelopment: Int
+    var statsChangeKnowledge: Int
+    var statsChangeSocial: Int
+    var statsChangeSickness: Int
+    var statsChangeStress: Int
+    
+    // use binary; morning-noon-dusk-night
+    // example: "1000" = morning exclusive
+    var availability: String
+    
+    
+}
