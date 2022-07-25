@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var headerTitle: UILabel!
     @IBOutlet weak var headerTimeIndicator: UILabel!
+    @IBOutlet weak var headerView: UIView!
     
     @IBOutlet weak var statsBarKnowledge: UILabel!
     @IBOutlet weak var statsBarSocial: UILabel!
@@ -24,8 +25,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var notesTextView: UITextView!
     
     @IBOutlet weak var actionTableView: UITableView!
-    @IBOutlet weak var actionSelectedApp: UILabel!
+    @IBOutlet weak var actionSelectedAppLabel: UILabel!
     @IBOutlet weak var actionActButton: UIButton!
+    
+    @IBOutlet weak var actionDevelopmentChangeLabel: UILabel!
+    @IBOutlet weak var actionKnowledgeChangeLabel: UILabel!
+    @IBOutlet weak var actionSocialChangeLabel: UILabel!
+    @IBOutlet weak var actionSicknessChangeLabel: UILabel!
+    @IBOutlet weak var actionStressChangeLabel: UILabel!
+
     
     let statsList = ["Knowledge", "Social", "Sickness", "Stress"]
     
@@ -63,6 +71,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         resetAction()
         updateBar()
         updateNotes()
+        updateColorTimeframe()
+        checkState()
         actionTableView.reloadData()
     }
     
@@ -88,8 +98,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func checkState(){
-        if player.currentDay == 7 {
-            
+        if player.progressDevelopment == 100 {
+//            performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
         }
     }
     
@@ -126,9 +136,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func appendLog(){
-        logTextView.text.append("\nDone \(availableAppList[selectedApp].actionName).")
+        logTextView.text.append("\nYou've done \(availableAppList[selectedApp].actionName).")
         if availableAppList[selectedApp].progressChangeDevelopment != 0 {
-            logTextView.text.append(" Development increased by \((availableAppList[selectedApp].progressChangeDevelopment + ( player.statsKnowledge/20)))")
+            logTextView.text.append(" Development increased by \((availableAppList[selectedApp].progressChangeDevelopment + (player.statsKnowledge/20)))")
         }
         
         let changes = [availableAppList[selectedApp].statsChangeKnowledge, availableAppList[selectedApp].statsChangeSocial, availableAppList[selectedApp].statsChangeSickness, availableAppList[selectedApp].statsChangeStress]
@@ -145,7 +155,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 logTextView.text.append("\nNo changes to \(statsList[i]).")
             }
         }
-        logTextView.scrollRangeToVisible(NSMakeRange(logTextView.text.count - 1, 1))
+        
+        logTextView.text.append("\nIt's now \(timeframeIntToText(timeframe: player.currentTimeframe)).")
+        
+        logTextView.scrollRangeToVisible(NSMakeRange(logTextView.text.count, 1))
     }
     
     func limitStatChanges(){
@@ -164,8 +177,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func resetAction(){
         selectedApp = -1
-        actionSelectedApp.text = "-"
-        
+        actionSelectedAppLabel.text = "-"
+        actionDevelopmentChangeLabel.text = "N/A"
+        actionKnowledgeChangeLabel.text = "N/A"
+        actionSocialChangeLabel.text = "N/A"
+        actionSicknessChangeLabel.text = "N/A"
+        actionStressChangeLabel.text = "N/A"
+    }
+    
+    func updateActionStatsChange(selectedAction: Action){
+        actionSelectedAppLabel.text = selectedAction.actionName
+        actionDevelopmentChangeLabel.text = selectedAction.progressChangeDevelopment > 0 ? "+\(selectedAction.progressChangeDevelopment) (+\((player.statsKnowledge/20)))" : "\(selectedAction.progressChangeDevelopment)"
+        actionKnowledgeChangeLabel.text = selectedAction.statsChangeKnowledge > 0 ? "+\(selectedAction.statsChangeKnowledge)" : "\(selectedAction.statsChangeKnowledge)"
+        actionSocialChangeLabel.text = selectedAction.statsChangeSocial > 0 ? "+\(selectedAction.statsChangeSocial)" : "\(selectedAction.statsChangeSocial)"
+        actionSicknessChangeLabel.text = selectedAction.statsChangeSickness > 0 ? "+\(selectedAction.statsChangeSickness)" : "\(selectedAction.statsChangeSickness)"
+        actionStressChangeLabel.text = selectedAction.statsChangeStress > 0 ? "+\(selectedAction.statsChangeStress)" : "\(selectedAction.statsChangeStress)"
+    }
+    
+    func updateColorTimeframe(){
+        let timeframeColor = ["BGMorning", "BGNoon", "BGDusk", "BGNight"]
+        headerView.backgroundColor = UIColor(named: timeframeColor[player.currentTimeframe])
     }
     
     func updateBar(){
@@ -208,6 +239,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return progressText
     }
     
+    func changeIntToText(change: Int) -> String{
+        var changeText = ""
+        let isNegative = change < 0 ? true : false
+        let changeConvert = max(0, abs(change/5))
+        
+        if change != 0 {
+            for _ in 0...changeConvert {
+                changeText.append(isNegative ? "-" : "+")
+            }
+        } else {
+            changeText = "N/A"
+        }
+        return changeText
+    }
+    
     func timeframeIntToText(timeframe: Int) -> String{
         let timeframeText = ["Morning 🌄", "Noon ☀️", "Dusk 🌇", "Night 🌙"]
         return timeframeText[timeframe]
@@ -219,22 +265,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 40
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = actionTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath)
-        cell.textLabel?.text = availableAppList[indexPath.row].actionName
+        let index = indexPath.row
+        let cell = actionTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
+        cell.actionNameLabel.text = availableAppList[index].actionName
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedApp = indexPath.row
-        actionSelectedApp.text = availableAppList[selectedApp].actionName
+        updateActionStatsChange(selectedAction: availableAppList[selectedApp])
     }
-    
-
-
 }
 
 
