@@ -16,6 +16,7 @@ struct Player: Codable{
     var statsSickness: Int
     var statsStress: Int
     
-    
+    var statsUpperLimit: Int
+    var statsBottomLimit: Int
     //TODO: trackers, such as action use count
 }
