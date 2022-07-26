@@ -14,10 +14,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var headerTimeIndicator: UILabel!
     @IBOutlet weak var headerView: UIView!
     
-    @IBOutlet weak var statsBarKnowledge: UILabel!
-    @IBOutlet weak var statsBarSocial: UILabel!
-    @IBOutlet weak var statsBarSickness: UILabel!
-    @IBOutlet weak var statsBarStress: UILabel!
+    @IBOutlet weak var knowledgeProgressView: UIProgressView!
+    @IBOutlet weak var socialProgressView: UIProgressView!
+    @IBOutlet weak var sicknessProgressView: UIProgressView!
+    @IBOutlet weak var stressProgressView: UIProgressView!
     
     @IBOutlet weak var progressBarDevelopment: UILabel!
     @IBOutlet weak var developmentProgressView: UIProgressView!
@@ -60,10 +60,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedApp: Int = -1
     var availableAppList: [Action] = []
     var unlockedScene: Scene?
+    var notesText: String = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initDesign()
         refreshScreenState()
         actionTableView.delegate = self
         actionTableView.dataSource = self
@@ -71,13 +73,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
     }
     
+    func initDesign(){
+        developmentProgressView.transform = developmentProgressView.transform.scaledBy(x: 1, y: 18)
+        knowledgeProgressView.transform = knowledgeProgressView.transform.scaledBy(x: 1, y: 10)
+        socialProgressView.transform = socialProgressView.transform.scaledBy(x: 1, y: 10)
+        sicknessProgressView.transform = sicknessProgressView.transform.scaledBy(x: 1, y: 10)
+        stressProgressView.transform = stressProgressView.transform.scaledBy(x: 1, y: 10)
+    }
+    
     func refreshScreenState(){
         checkAvailableApp()
         resetAction()
+        checkState()
         updateBar()
         updateNotes()
         updateColorTimeframe()
-        checkState()
         actionTableView.reloadData()
     }
     
@@ -102,19 +112,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         refreshScreenState()
     }
     
-    func checkState(){
-        if player.progressDevelopment == 100 {
-            if !scene[0].isUnlocked {
-                unlockedScene = scene[0]
-                scene[0].isUnlocked = true
-                performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
-            }
+    func doEnding(sceneNumber: Int){
+        if !scene[sceneNumber].isUnlocked {
+            unlockedScene = scene[sceneNumber]
+            scene[sceneNumber].isUnlocked = true
+            performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
         }
     }
     
-    func updateNotes(){
-        
-        var notesText = ""
+    func checkState(){
+        if player.progressDevelopment == 100 {
+            doEnding(sceneNumber: 0)
+            notesText.append("Development has been finished! Congratulations!\n")
+        }
         
         if player.currentDay == 1 {
             notesText.append("It's your last sprint!\n")
@@ -127,9 +137,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if player.currentDay == 7 {
             notesText.append("Almost there! Make sure to finish your development!\n")
         }
-        if player.progressDevelopment == 100 {
-            notesText.append("Development has been finished! Congratulations!\n")
-        }
         if player.statsSocial < 15 {
             notesText.append("Social is too low! Don't be anti-social.\n")
         }
@@ -139,9 +146,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if player.statsStress > 80 {
             notesText.append("Stress is too high! Touch grass.\n")
         }
-            
         
+    }
+    
+    func updateNotes(){
         notesTextView.text = notesText
+        notesText = ""
     }
     
     func appendLog(){
@@ -204,27 +214,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func updateColorTimeframe(){
-        let timeframeColor = ["BGMorning", "BGNoon", "BGDusk", "BGNight"]
-        UIView.animate(withDuration: 0.5){
+        let timeframeColor = ["BGMorning2", "BGNoon2", "BGDusk2", "BGNight2"]
+        UIView.animate(withDuration: 1){
             self.headerView.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
         }
     }
     
     func updateBar(){
-        progressBarDevelopment.text = barIntToText(progress: player.progressDevelopment)
-        statsBarKnowledge.text = barIntToText(progress: player.statsKnowledge)
-        statsBarSocial.text = barIntToText(progress: player.statsSocial)
-        statsBarSickness.text = barIntToText(progress: player.statsSickness)
-        statsBarStress.text = barIntToText(progress: player.statsStress)
         headerTimeIndicator.text = "Day \(player.currentDay) - \(timeframeIntToText(timeframe: player.currentTimeframe))"
+        
+        developmentProgressView.setProgress(Float(player.progressDevelopment)/Float(player.statsUpperLimit), animated: true)
+        knowledgeProgressView.setProgress(Float(player.statsKnowledge)/Float(player.statsUpperLimit), animated: true)
+        socialProgressView.setProgress(Float(player.statsSocial)/Float(player.statsUpperLimit), animated: true)
+        sicknessProgressView.setProgress(Float(player.statsSickness)/Float(player.statsUpperLimit), animated: true)
+        stressProgressView.setProgress(Float(player.statsStress)/Float(player.statsUpperLimit), animated: true)
     }
     
     func updateBarNumber(){
         progressBarDevelopment.text = "\(player.progressDevelopment) / \(player.statsUpperLimit)"
-        statsBarKnowledge.text = "\(player.statsKnowledge) / \(player.statsUpperLimit)"
-        statsBarSocial.text = "\(player.statsSocial) / \(player.statsUpperLimit)"
-        statsBarSickness.text = "\(player.statsSickness) / \(player.statsUpperLimit)"
-        statsBarStress.text = "\(player.statsStress) / \(player.statsUpperLimit)"
+//        statsBarKnowledge.text = "\(player.statsKnowledge) / \(player.statsUpperLimit)"
+//        statsBarSocial.text = "\(player.statsSocial) / \(player.statsUpperLimit)"
+//        statsBarSickness.text = "\(player.statsSickness) / \(player.statsUpperLimit)"
+//        statsBarStress.text = "\(player.statsStress) / \(player.statsUpperLimit)"
         headerTimeIndicator.text = "Day \(player.currentDay) - \(timeframeIntToText(timeframe: player.currentTimeframe))"
     }
     
@@ -241,14 +252,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func barIntToText(progress: Int) -> String{
-        var progressText = ""
-        let progressConvert = max(0, progress/5)
-        for _ in 0...progressConvert {
-            progressText.append("#")
-        }
-        return progressText
-    }
+//    func barIntToText(progress: Int) -> String{
+//        var progressText = ""
+//        let progressConvert = max(0, progress/5)
+//        for _ in 0...progressConvert {
+//            progressText.append("#")
+//        }
+//        return progressText
+//    }
     
     func changeIntToText(change: Int) -> String{
         var changeText = ""
