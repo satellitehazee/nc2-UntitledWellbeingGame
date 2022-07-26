@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var statsBarStress: UILabel!
     
     @IBOutlet weak var progressBarDevelopment: UILabel!
+    @IBOutlet weak var developmentProgressView: UIProgressView!
     
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var notesTextView: UITextView!
@@ -53,8 +54,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, availability: "0001"),
         Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, availability: "1110")
     ]
+    var scene: [Scene] = [
+        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", isUnlocked: false)
+    ]
     var selectedApp: Int = -1
     var availableAppList: [Action] = []
+    var unlockedScene: Scene?
     
     
     override func viewDidLoad() {
@@ -99,7 +104,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func checkState(){
         if player.progressDevelopment == 100 {
-//            performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
+            if !scene[0].isUnlocked {
+                unlockedScene = scene[0]
+                scene[0].isUnlocked = true
+                performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
+            }
         }
     }
     
@@ -196,7 +205,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func updateColorTimeframe(){
         let timeframeColor = ["BGMorning", "BGNoon", "BGDusk", "BGNight"]
-        headerView.backgroundColor = UIColor(named: timeframeColor[player.currentTimeframe])
+        UIView.animate(withDuration: 0.5){
+            self.headerView.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
+        }
     }
     
     func updateBar(){
@@ -278,6 +289,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedApp = indexPath.row
         updateActionStatsChange(selectedAction: availableAppList[selectedApp])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoCutsceneSegue" {
+            let destination = segue.destination as? UnlockableViewController
+            destination?.unlockedScene = self.unlockedScene
+        }
     }
 }
 

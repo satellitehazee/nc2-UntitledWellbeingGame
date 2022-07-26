@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		64AF41AB288E55E000F76C0B /* ActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41AA288E55E000F76C0B /* ActionTableViewCell.swift */; };
+		64AF41B1288E94E200F76C0B /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41B0288E94E200F76C0B /* Scene.swift */; };
+		64AF41B3288E96BB00F76C0B /* UnlockableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41B2288E96BB00F76C0B /* UnlockableViewController.swift */; };
 		64EF539E288D7485008DD58E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF539D288D7485008DD58E /* AppDelegate.swift */; };
 		64EF53A0288D7485008DD58E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF539F288D7485008DD58E /* SceneDelegate.swift */; };
 		64EF53A2288D7485008DD58E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF53A1288D7485008DD58E /* ViewController.swift */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		64AF41AA288E55E000F76C0B /* ActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTableViewCell.swift; sourceTree = "<group>"; };
+		64AF41B0288E94E200F76C0B /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		64AF41B2288E96BB00F76C0B /* UnlockableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockableViewController.swift; sourceTree = "<group>"; };
 		64EF539A288D7485008DD58E /* WellbeingDraft.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellbeingDraft.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EF539D288D7485008DD58E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64EF539F288D7485008DD58E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 			children = (
 				64EF53B4288D9AA7008DD58E /* Action.swift */,
 				64EF53B6288D9AB7008DD58E /* Player.swift */,
+				64AF41B0288E94E200F76C0B /* Scene.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -86,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				64EF53A1288D7485008DD58E /* ViewController.swift */,
+				64AF41B2288E96BB00F76C0B /* UnlockableViewController.swift */,
 				64EF53A3288D7485008DD58E /* Main.storyboard */,
 			);
 			path = Scene;
@@ -179,10 +185,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64AF41B3288E96BB00F76C0B /* UnlockableViewController.swift in Sources */,
 				64EF53A2288D7485008DD58E /* ViewController.swift in Sources */,
 				64EF53B5288D9AA7008DD58E /* Action.swift in Sources */,
 				64EF539E288D7485008DD58E /* AppDelegate.swift in Sources */,
 				64EF53B7288D9AB7008DD58E /* Player.swift in Sources */,
+				64AF41B1288E94E200F76C0B /* Scene.swift in Sources */,
 				64EF53A0288D7485008DD58E /* SceneDelegate.swift in Sources */,
 				64AF41AB288E55E000F76C0B /* ActionTableViewCell.swift in Sources */,
 			);

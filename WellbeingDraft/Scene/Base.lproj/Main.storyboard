@@ -130,6 +130,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PVx-5p-uST">
+                                        <rect key="frame" x="51" y="8" width="521" height="4"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77375601719136622" green="0.84074234386538327" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
@@ -359,33 +363,35 @@ New Line 1</string>
             </objects>
             <point key="canvasLocation" x="19.597989949748744" y="97.841726618705039"/>
         </scene>
-        <!--View Controller-->
+        <!--Unlockable View Controller-->
         <scene sceneID="cKA-MU-JxN">
             <objects>
-                <viewController id="wjd-FS-fWX" sceneMemberID="viewController">
+                <viewController id="wjd-FS-fWX" customClass="UnlockableViewController" customModule="WellbeingDraft" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aBX-IZ-CJC">
                         <rect key="frame" x="0.0" y="0.0" width="704" height="754"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scene unlocked!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8By-Rq-rr0">
-                                <rect key="frame" x="245" y="91" width="214" height="36"/>
+                                <rect key="frame" x="245" y="64" width="214" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMM-5L-qsV">
-                                <rect key="frame" x="332" y="135" width="44" height="32"/>
+                                <rect key="frame" x="330" y="183" width="44" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="questionmark.app.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vG3-v5-eYg">
-                                <rect key="frame" x="232" y="266" width="240" height="240"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scene Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRh-lF-ZvS">
+                                <rect key="frame" x="141" y="143" width="422" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="labelColor"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Insert scene story here." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lzb-4B-3HY">
                                 <rect key="frame" x="152" y="514" width="400" height="138"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -394,10 +400,22 @@ New Line 1</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="questionmark.app.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vG3-v5-eYg">
+                                <rect key="frame" x="232" y="249" width="240" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E9Z-Wn-tiq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="sceneDescriptionTextView" destination="Lzb-4B-3HY" id="BVd-45-7Mg"/>
+                        <outlet property="sceneGreetLabel" destination="8By-Rq-rr0" id="hiz-Qc-zjJ"/>
+                        <outlet property="sceneIdLabel" destination="RMM-5L-qsV" id="a67-uc-eiF"/>
+                        <outlet property="sceneImageView" destination="vG3-v5-eYg" id="rO1-8J-96h"/>
+                        <outlet property="sceneTitleLabel" destination="zRh-lF-ZvS" id="JAh-Q8-p9g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLo-2V-e6J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
