@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var headerTimeIndicator: UILabel!
     @IBOutlet weak var headerView: UIView!
     
+    @IBOutlet weak var backButton: UIButton!
+    
     @IBOutlet weak var knowledgeProgressView: UIProgressView!
     @IBOutlet weak var socialProgressView: UIProgressView!
     @IBOutlet weak var sicknessProgressView: UIProgressView!
@@ -38,21 +40,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let statsList = ["Knowledge", "Social", "Sickness", "Stress"]
     
-    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 20, statsKnowledge: 30, statsSocial: 30, statsSickness: 30, statsStress: 30, statsUpperLimit: 100, statsBottomLimit: 0)
+    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 20, statsKnowledge: 20, statsSocial: 70, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
     var action: [Action] = [
-        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, availability: "1111"),
-        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, availability: "1111"),
-        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, availability: "1111"),
-        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, availability: "1111"),
-        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, availability: "1000"),
-        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, availability: "1111"),
-        Action(actionName: "Youtube", progressChangeDevelopment: 0, statsChangeKnowledge: 5, statsChangeSocial: -5, statsChangeSickness: 5, statsChangeStress: 5, availability: "1111"),
-        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, availability: "0111"),
-        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, availability: "1111"),
-        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, availability: "1111"),
-        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, availability: "1111"),
-        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, availability: "0001"),
-        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, availability: "1110")
+        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111"),
+        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111"),
+        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
+        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
+        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1000"),
+        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isPickable: true, availability: "1111"),
+        Action(actionName: "Youtube", progressChangeDevelopment: 0, statsChangeKnowledge: 5, statsChangeSocial: -5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
+        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isPickable: true, availability: "0111"),
+        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
+        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111"),
+        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111"),
+        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isPickable: true, availability: "0001"),
+        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isPickable: true, availability: "1110")
     ]
     var scene: [Scene] = [
         Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", isUnlocked: false)
@@ -79,6 +81,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         socialProgressView.transform = socialProgressView.transform.scaledBy(x: 1, y: 10)
         sicknessProgressView.transform = sicknessProgressView.transform.scaledBy(x: 1, y: 10)
         stressProgressView.transform = stressProgressView.transform.scaledBy(x: 1, y: 10)
+        actionActButton.tintColor = .black
+        backButton.tintColor = .gray
     }
     
     func refreshScreenState(){
@@ -89,6 +93,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateNotes()
         updateColorTimeframe()
         actionTableView.reloadData()
+    }
+    
+    @IBAction func backToMenu(_ sender: Any) {
+        dismiss(animated: true)
     }
     
     @IBAction func doAction(_ sender: Any) {
@@ -106,8 +114,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 player.currentTimeframe = 0
                 player.currentDay += 1
             }
-            
-            appendLog()
         }
         refreshScreenState()
     }
@@ -211,6 +217,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         actionSocialChangeLabel.text = selectedAction.statsChangeSocial > 0 ? "+\(selectedAction.statsChangeSocial)" : "\(selectedAction.statsChangeSocial)"
         actionSicknessChangeLabel.text = selectedAction.statsChangeSickness > 0 ? "+\(selectedAction.statsChangeSickness)" : "\(selectedAction.statsChangeSickness)"
         actionStressChangeLabel.text = selectedAction.statsChangeStress > 0 ? "+\(selectedAction.statsChangeStress)" : "\(selectedAction.statsChangeStress)"
+        
+        if selectedAction.isPickable {
+            actionSelectedAppLabel.textColor = .black
+//            actionActButton.setTitleColor(.white, for: .normal)
+//            actionActButton.setTitle("Act →", for: .normal)
+            actionActButton.tintColor = .black
+            actionActButton.isUserInteractionEnabled = true
+        } else {
+//            print("aaaaaaa")
+            actionSelectedAppLabel.textColor = .red
+//            actionActButton.setTitleColor(.red, for: .normal)
+//            actionActButton.setTitle("Act →", for: .normal)
+            actionActButton.tintColor = .gray
+            actionActButton.isUserInteractionEnabled = false
+        }
     }
     
     func updateColorTimeframe(){
@@ -242,16 +263,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func checkAvailableApp(){
         availableAppList.removeAll()
         for act in action {
+            var actTemp = act
             var idx = 0
-            for ch in act.availability {
+            for ch in actTemp.availability {
+                actTemp.isPickable = checkPlayerCondition(act: act)
                 if idx == player.currentTimeframe && ch == "1" {
-                    availableAppList.append(act)
+                    availableAppList.append(actTemp)
                 }
                 idx += 1
             }
         }
     }
     
+    func checkPlayerCondition(act: Action) -> Bool{
+        if player.statsSocial + act.statsChangeSocial < 0 {
+            return false
+        } else if player.statsSickness + act.statsChangeSickness > 100 {
+            return false
+        } else if player.statsStress + act.statsChangeStress > 100 {
+            return false
+        } else {
+            return true
+        }
+    }
 //    func barIntToText(progress: Int) -> String{
 //        var progressText = ""
 //        let progressConvert = max(0, progress/5)
@@ -294,6 +328,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let index = indexPath.row
         let cell = actionTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
         cell.actionNameLabel.text = availableAppList[index].actionName
+        if availableAppList[index].isPickable == false {
+//            cell.isUserInteractionEnabled = false
+            cell.actionNameLabel.textColor = .red
+        } else {
+            cell.actionNameLabel.textColor = .black
+        }
         return cell
     }
     

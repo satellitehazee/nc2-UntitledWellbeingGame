@@ -88,6 +88,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brM-Ue-Pj2">
+                                        <rect key="frame" x="42" y="50" width="46" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="" image="arrow.turn.down.left" catalog="system"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="arrow.turn.down.left" catalog="system" title=""/>
+                                        <connections>
+                                            <action selector="backToMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KaX-gN-wM0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.89756404501239784" blue="0.96074481621674157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
@@ -172,7 +183,7 @@
                                         <rect key="frame" x="51" y="88.5" width="521" height="1.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" systemColor="systemCyanColor"/>
+                                        <color key="tintColor" systemColor="systemGreenColor"/>
                                     </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77375601719136622" green="0.84074234386538327" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -387,6 +398,7 @@ New Line 1</string>
                         <outlet property="actionSocialChangeLabel" destination="YpG-Pz-MJY" id="Cmv-eo-BF1"/>
                         <outlet property="actionStressChangeLabel" destination="FGC-PL-atg" id="ESI-Zx-qAQ"/>
                         <outlet property="actionTableView" destination="HTX-Ly-PdY" id="hBw-lz-oph"/>
+                        <outlet property="backButton" destination="brM-Ue-Pj2" id="0ci-wQ-rxv"/>
                         <outlet property="developmentProgressView" destination="PVx-5p-uST" id="oDe-br-9U8"/>
                         <outlet property="headerTimeIndicator" destination="3DL-xd-aGy" id="cBx-iF-C6D"/>
                         <outlet property="headerTitle" destination="Nfs-tI-0QE" id="4pD-nD-9jj"/>
@@ -397,7 +409,7 @@ New Line 1</string>
                         <outlet property="sicknessProgressView" destination="wNG-Ei-oY4" id="m63-Dc-96T"/>
                         <outlet property="socialProgressView" destination="cHv-HB-f0o" id="Ugj-NK-Q9v"/>
                         <outlet property="stressProgressView" destination="2WL-xW-OEP" id="bJF-Kb-Byy"/>
-                        <segue destination="wjd-FS-fWX" kind="presentation" identifier="gotoCutsceneSegue" id="yAg-TB-g81"/>
+                        <segue destination="wjd-FS-fWX" kind="show" identifier="gotoCutsceneSegue" id="yAg-TB-g81"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -475,6 +487,7 @@ New Line 1</string>
                         <viewLayoutGuide key="safeArea" id="E9Z-Wn-tiq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="jFF-Yo-rUk"/>
                     <connections>
                         <outlet property="sceneDescriptionTextView" destination="Lzb-4B-3HY" id="BVd-45-7Mg"/>
                         <outlet property="sceneGreetLabel" destination="8By-Rq-rr0" id="hiz-Qc-zjJ"/>
@@ -489,6 +502,7 @@ New Line 1</string>
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.turn.down.left" catalog="system" width="128" height="99"/>
         <image name="questionmark.app.fill" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -501,6 +515,9 @@ New Line 1</string>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
