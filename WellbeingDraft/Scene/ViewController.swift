@@ -47,7 +47,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     
     let statsList = ["Knowledge", "Social", "Sickness", "Stress"]
     
-    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 20, statsKnowledge: 20, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
+    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 2, statsKnowledge: 20, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
     var action: [Action] = [
         Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
         Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true,availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
@@ -375,15 +375,19 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         
         if !availableAppList[index].isPickable {
             cell.actionNameLabel.textColor = .red
+            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.red, renderingMode: .alwaysOriginal)
         } else {
             cell.actionNameLabel.textColor = .black
             actionActButton.setTitleColor(.white, for: .normal)
+            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         }
         
         if !availableAppList[index].isActive {
             cell.actionNameLabel.textColor = .gray
+            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app.dashed")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
         } else {
             cell.actionNameLabel.textColor = .black
+            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         }
         return cell
     }
