@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
 
     @IBOutlet weak var headerTitle: UILabel!
@@ -21,13 +21,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var sicknessProgressView: UIProgressView!
     @IBOutlet weak var stressProgressView: UIProgressView!
     
-    @IBOutlet weak var progressBarDevelopment: UILabel!
     @IBOutlet weak var developmentProgressView: UIProgressView!
     
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var notesTextView: UITextView!
     
     @IBOutlet weak var actionTableView: UITableView!
+    @IBOutlet weak var actionCollectionView: UICollectionView!
     @IBOutlet weak var actionSelectedAppLabel: UILabel!
     @IBOutlet weak var actionActButton: UIButton!
     
@@ -40,24 +40,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let statsList = ["Knowledge", "Social", "Sickness", "Stress"]
     
-    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 20, statsKnowledge: 20, statsSocial: 70, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
+    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 20, statsKnowledge: 20, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
     var action: [Action] = [
-        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111"),
-        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111"),
-        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
-        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
-        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1000"),
-        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isPickable: true, availability: "1111"),
-        Action(actionName: "Youtube", progressChangeDevelopment: 0, statsChangeKnowledge: 5, statsChangeSocial: -5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
-        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isPickable: true, availability: "0111"),
-        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111"),
-        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111"),
-        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111"),
-        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isPickable: true, availability: "0001"),
-        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isPickable: true, availability: "1110")
+        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
+        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
+        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
+        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
+        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
+        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
+        Action(actionName: "Youtube", progressChangeDevelopment: 0, statsChangeKnowledge: 5, statsChangeSocial: -5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Youtube", iconHighlight: "YoutubeH"),
+        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isPickable: true, availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
+        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
+        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
+        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111", iconDefault: "Game", iconHighlight: "GameH"),
+        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isPickable: true, availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH"),
+        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isPickable: true, availability: "1110", iconDefault: "Nap", iconHighlight: "NapH")
     ]
     var scene: [Scene] = [
-        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", isUnlocked: false)
+        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false)
     ]
     var selectedApp: Int = -1
     var availableAppList: [Action] = []
@@ -71,6 +71,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         refreshScreenState()
         actionTableView.delegate = self
         actionTableView.dataSource = self
+        actionCollectionView.delegate = self
+        actionCollectionView.dataSource = self
         logTextView.text = "Untitled Wellbeing Game.\n"
         // Do any additional setup after loading the view.
     }
@@ -93,6 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateNotes()
         updateColorTimeframe()
         actionTableView.reloadData()
+        actionCollectionView.reloadData()
     }
     
     @IBAction func backToMenu(_ sender: Any) {
@@ -114,6 +117,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 player.currentTimeframe = 0
                 player.currentDay += 1
             }
+            
+            appendLog()
         }
         refreshScreenState()
     }
@@ -252,7 +257,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func updateBarNumber(){
-        progressBarDevelopment.text = "\(player.progressDevelopment) / \(player.statsUpperLimit)"
+//        progressBarDevelopment.text = "\(player.progressDevelopment) / \(player.statsUpperLimit)"
 //        statsBarKnowledge.text = "\(player.statsKnowledge) / \(player.statsUpperLimit)"
 //        statsBarSocial.text = "\(player.statsSocial) / \(player.statsUpperLimit)"
 //        statsBarSickness.text = "\(player.statsSickness) / \(player.statsUpperLimit)"
@@ -315,7 +320,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return timeframeText[timeframe]
     }
     
-    
+    //MARK: TABLE VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return availableAppList.count
     }
@@ -340,6 +345,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedApp = indexPath.row
         updateActionStatsChange(selectedAction: availableAppList[selectedApp])
+    }
+    
+    //MARK: COLLECTION VIEW
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return availableAppList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let index = indexPath.row
+        let cell = actionCollectionView.dequeueReusableCell(withReuseIdentifier: "actionItem", for: indexPath) as! ActionCollectionViewCell
+        cell.actionNameLabel.text = availableAppList[index].actionName
+        
+        if availableAppList[index].isPickable == false {
+//            cell.isUserInteractionEnabled = false
+            cell.actionNameLabel.textColor = .red
+        } else {
+            cell.actionNameLabel.textColor = .black
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedApp = indexPath.row
+        updateActionStatsChange(selectedAction: availableAppList[selectedApp])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 128, height: 128)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

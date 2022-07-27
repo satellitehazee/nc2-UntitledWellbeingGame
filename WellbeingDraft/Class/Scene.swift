@@ -11,5 +11,6 @@ struct Scene: Codable {
     var sceneId: Int
     var sceneName: String
     var sceneDescription: String
+    var sceneImage: String
     var isUnlocked: Bool
 }

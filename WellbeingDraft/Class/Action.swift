@@ -19,5 +19,8 @@ struct Action: Codable {
     // example: "1000" = morning exclusive
     var availability: String
     
+    var iconDefault: String
+    var iconHighlight: String
+    
     
 }
