@@ -12,6 +12,8 @@
 		64AF41B3288E96BB00F76C0B /* UnlockableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41B2288E96BB00F76C0B /* UnlockableViewController.swift */; };
 		64AF41B5288FAF5600F76C0B /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41B4288FAF5600F76C0B /* MainMenuViewController.swift */; };
 		64AF41B72890E07000F76C0B /* ActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41B62890E07000F76C0B /* ActionCollectionViewCell.swift */; };
+		64AF41B92890F04D00F76C0B /* SceneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41B82890F04D00F76C0B /* SceneCollectionViewCell.swift */; };
+		64AF41BB2890F0D500F76C0B /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF41BA2890F0D500F76C0B /* GalleryViewController.swift */; };
 		64EF539E288D7485008DD58E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF539D288D7485008DD58E /* AppDelegate.swift */; };
 		64EF53A0288D7485008DD58E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF539F288D7485008DD58E /* SceneDelegate.swift */; };
 		64EF53A2288D7485008DD58E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF53A1288D7485008DD58E /* ViewController.swift */; };
@@ -28,6 +30,8 @@
 		64AF41B2288E96BB00F76C0B /* UnlockableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockableViewController.swift; sourceTree = "<group>"; };
 		64AF41B4288FAF5600F76C0B /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		64AF41B62890E07000F76C0B /* ActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCollectionViewCell.swift; sourceTree = "<group>"; };
+		64AF41B82890F04D00F76C0B /* SceneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCollectionViewCell.swift; sourceTree = "<group>"; };
+		64AF41BA2890F0D500F76C0B /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		64EF539A288D7485008DD58E /* WellbeingDraft.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellbeingDraft.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EF539D288D7485008DD58E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64EF539F288D7485008DD58E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			children = (
 				64EF53A1288D7485008DD58E /* ViewController.swift */,
 				64AF41B2288E96BB00F76C0B /* UnlockableViewController.swift */,
+				64AF41BA2890F0D500F76C0B /* GalleryViewController.swift */,
 				64AF41B4288FAF5600F76C0B /* MainMenuViewController.swift */,
 				64EF53A3288D7485008DD58E /* Main.storyboard */,
 			);
@@ -116,6 +121,7 @@
 			children = (
 				64AF41AA288E55E000F76C0B /* ActionTableViewCell.swift */,
 				64AF41B62890E07000F76C0B /* ActionCollectionViewCell.swift */,
+				64AF41B82890F04D00F76C0B /* SceneCollectionViewCell.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -193,12 +199,14 @@
 			files = (
 				64AF41B5288FAF5600F76C0B /* MainMenuViewController.swift in Sources */,
 				64AF41B3288E96BB00F76C0B /* UnlockableViewController.swift in Sources */,
+				64AF41B92890F04D00F76C0B /* SceneCollectionViewCell.swift in Sources */,
 				64EF53A2288D7485008DD58E /* ViewController.swift in Sources */,
 				64EF53B5288D9AA7008DD58E /* Action.swift in Sources */,
 				64AF41B72890E07000F76C0B /* ActionCollectionViewCell.swift in Sources */,
 				64EF539E288D7485008DD58E /* AppDelegate.swift in Sources */,
 				64EF53B7288D9AB7008DD58E /* Player.swift in Sources */,
 				64AF41B1288E94E200F76C0B /* Scene.swift in Sources */,
+				64AF41BB2890F0D500F76C0B /* GalleryViewController.swift in Sources */,
 				64EF53A0288D7485008DD58E /* SceneDelegate.swift in Sources */,
 				64AF41AB288E55E000F76C0B /* ActionTableViewCell.swift in Sources */,
 			);

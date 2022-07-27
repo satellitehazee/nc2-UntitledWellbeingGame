@@ -15,6 +15,7 @@ struct Action: Codable {
     var statsChangeSickness: Int
     var statsChangeStress: Int
     var isPickable: Bool
+    var isActive: Bool
     // use binary; morning-noon-dusk-night
     // example: "1000" = morning exclusive
     var availability: String

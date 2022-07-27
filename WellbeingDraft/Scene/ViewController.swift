@@ -7,12 +7,20 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
 
+
+    
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var developmentView: UIView!
+    @IBOutlet weak var actionView: UIView!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var notesView: UIView!
+    @IBOutlet weak var desktopImageView: UIImageView!
+    
     @IBOutlet weak var headerTitle: UILabel!
     @IBOutlet weak var headerTimeIndicator: UILabel!
-    @IBOutlet weak var headerView: UIView!
     
     @IBOutlet weak var backButton: UIButton!
     
@@ -26,7 +34,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var notesTextView: UITextView!
     
-    @IBOutlet weak var actionTableView: UITableView!
     @IBOutlet weak var actionCollectionView: UICollectionView!
     @IBOutlet weak var actionSelectedAppLabel: UILabel!
     @IBOutlet weak var actionActButton: UIButton!
@@ -42,19 +49,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 20, statsKnowledge: 20, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
     var action: [Action] = [
-        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
-        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
-        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
-        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
-        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
-        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
-        Action(actionName: "Youtube", progressChangeDevelopment: 0, statsChangeKnowledge: 5, statsChangeSocial: -5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Youtube", iconHighlight: "YoutubeH"),
-        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isPickable: true, availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
-        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, availability: "1111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
-        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
-        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, availability: "1111", iconDefault: "Game", iconHighlight: "GameH"),
-        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isPickable: true, availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH"),
-        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isPickable: true, availability: "1110", iconDefault: "Nap", iconHighlight: "NapH")
+        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
+        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true,availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
+        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
+        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
+        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true,availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
+        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
+        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isPickable: true, isActive: true,availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
+        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
+        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, isActive: true,availability: "1111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
+        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, isActive: true,availability: "1111", iconDefault: "Game", iconHighlight: "GameH"),
+        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isPickable: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
+        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isPickable: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
     ]
     var scene: [Scene] = [
         Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false)
@@ -69,8 +75,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         initDesign()
         refreshScreenState()
-        actionTableView.delegate = self
-        actionTableView.dataSource = self
         actionCollectionView.delegate = self
         actionCollectionView.dataSource = self
         logTextView.text = "Untitled Wellbeing Game.\n"
@@ -85,6 +89,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         stressProgressView.transform = stressProgressView.transform.scaledBy(x: 1, y: 10)
         actionActButton.tintColor = .black
         backButton.tintColor = .gray
+        
+        
+        desktopImageView.backgroundColor = .white
+        headerView.backgroundColor = UIColor(named: "Window")
+        developmentView.backgroundColor = UIColor(named: "Window")
+        actionView.backgroundColor = UIColor(named: "Window")
+        statusView.backgroundColor = UIColor(named: "Window")
+        notesView.backgroundColor = UIColor(named: "Window")
+//        actionCollectionView.backgroundColor = UIColor(named: "Window")
+        actionCollectionView.backgroundColor = .none
+
+        headerView.layer.borderWidth = 2
+        developmentView.layer.borderWidth = 2
+        actionView.layer.borderWidth = 2
+        statusView.layer.borderWidth = 2
+        notesView.layer.borderWidth = 2
+//        actionCollectionView.layer.borderWidth = 2
+
     }
     
     func refreshScreenState(){
@@ -94,7 +116,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateBar()
         updateNotes()
         updateColorTimeframe()
-        actionTableView.reloadData()
         actionCollectionView.reloadData()
     }
     
@@ -104,7 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func doAction(_ sender: Any) {
         if selectedApp != -1 {
-            player.progressDevelopment += (availableAppList[selectedApp].progressChangeDevelopment + (player.statsKnowledge/20))
+            player.progressDevelopment += availableAppList[selectedApp].progressChangeDevelopment
             player.statsKnowledge += availableAppList[selectedApp].statsChangeKnowledge
             player.statsSocial += availableAppList[selectedApp].statsChangeSocial
             player.statsSickness += availableAppList[selectedApp].statsChangeSickness
@@ -168,7 +189,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func appendLog(){
         logTextView.text.append("\nYou've done \(availableAppList[selectedApp].actionName).")
         if availableAppList[selectedApp].progressChangeDevelopment != 0 {
-            logTextView.text.append(" Development increased by \((availableAppList[selectedApp].progressChangeDevelopment + (player.statsKnowledge/20)))")
+            logTextView.text.append(" Development increased by \(availableAppList[selectedApp].progressChangeDevelopment)")
         }
         
         let changes = [availableAppList[selectedApp].statsChangeKnowledge, availableAppList[selectedApp].statsChangeSocial, availableAppList[selectedApp].statsChangeSickness, availableAppList[selectedApp].statsChangeStress]
@@ -208,41 +229,55 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func resetAction(){
         selectedApp = -1
         actionSelectedAppLabel.text = "-"
+        actionSelectedAppLabel.textColor = .black
+        actionDevelopmentChangeLabel.textColor = .black
         actionDevelopmentChangeLabel.text = "N/A"
         actionKnowledgeChangeLabel.text = "N/A"
         actionSocialChangeLabel.text = "N/A"
         actionSicknessChangeLabel.text = "N/A"
         actionStressChangeLabel.text = "N/A"
+        actionActButton.tintColor = .gray
+        actionActButton.isUserInteractionEnabled = false
+        actionActButton.setTitleColor(.white, for: .normal)
     }
     
     func updateActionStatsChange(selectedAction: Action){
         actionSelectedAppLabel.text = selectedAction.actionName
-        actionDevelopmentChangeLabel.text = selectedAction.progressChangeDevelopment > 0 ? "+\(selectedAction.progressChangeDevelopment) (+\((player.statsKnowledge/20)))" : "\(selectedAction.progressChangeDevelopment)"
+        actionDevelopmentChangeLabel.text = selectedAction.progressChangeDevelopment > 0 ? "+\(selectedAction.progressChangeDevelopment)" : "\(selectedAction.progressChangeDevelopment)"
         actionKnowledgeChangeLabel.text = selectedAction.statsChangeKnowledge > 0 ? "+\(selectedAction.statsChangeKnowledge)" : "\(selectedAction.statsChangeKnowledge)"
         actionSocialChangeLabel.text = selectedAction.statsChangeSocial > 0 ? "+\(selectedAction.statsChangeSocial)" : "\(selectedAction.statsChangeSocial)"
         actionSicknessChangeLabel.text = selectedAction.statsChangeSickness > 0 ? "+\(selectedAction.statsChangeSickness)" : "\(selectedAction.statsChangeSickness)"
         actionStressChangeLabel.text = selectedAction.statsChangeStress > 0 ? "+\(selectedAction.statsChangeStress)" : "\(selectedAction.statsChangeStress)"
         
-        if selectedAction.isPickable {
-            actionSelectedAppLabel.textColor = .black
-//            actionActButton.setTitleColor(.white, for: .normal)
-//            actionActButton.setTitle("Act →", for: .normal)
-            actionActButton.tintColor = .black
-            actionActButton.isUserInteractionEnabled = true
-        } else {
-//            print("aaaaaaa")
+        if !selectedAction.isPickable {
+            actionDevelopmentChangeLabel.textColor = .red
             actionSelectedAppLabel.textColor = .red
 //            actionActButton.setTitleColor(.red, for: .normal)
 //            actionActButton.setTitle("Act →", for: .normal)
+//            actionActButton.tintColor = .black
+        } else {
+            actionDevelopmentChangeLabel.textColor = .black
+            actionSelectedAppLabel.textColor = .black
+//            actionActButton.setTitleColor(.white, for: .normal)
+//            actionActButton.setTitle("Act →", for: .normal)
+//            actionActButton.tintColor = .gray
+        }
+        
+        if !selectedAction.isActive {
             actionActButton.tintColor = .gray
             actionActButton.isUserInteractionEnabled = false
+        } else {
+            actionActButton.tintColor = .black
+            actionActButton.isUserInteractionEnabled = true
         }
+            
     }
     
     func updateColorTimeframe(){
         let timeframeColor = ["BGMorning2", "BGNoon2", "BGDusk2", "BGNight2"]
-        UIView.animate(withDuration: 1){
-            self.headerView.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
+        UIView.animate(withDuration: 0.5){
+//            self.headerView.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
+            self.view.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
         }
     }
     
@@ -269,14 +304,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         availableAppList.removeAll()
         for act in action {
             var actTemp = act
-            var idx = 0
-            for ch in actTemp.availability {
-                actTemp.isPickable = checkPlayerCondition(act: act)
-                if idx == player.currentTimeframe && ch == "1" {
-                    availableAppList.append(actTemp)
-                }
-                idx += 1
+            let timeframeIndex = actTemp.availability.index(actTemp.availability.startIndex, offsetBy: player.currentTimeframe)
+            if actTemp.availability[timeframeIndex] == "1"{
+                actTemp.isActive = true
+            } else {
+                actTemp.isActive = false
             }
+            
+            actTemp.isPickable = checkPlayerCondition(act: act)
+            if actTemp.progressChangeDevelopment > 0 {
+                actTemp.progressChangeDevelopment += player.statsKnowledge/20
+            }
+            if !actTemp.isPickable {
+                actTemp.progressChangeDevelopment = Int(Double(actTemp.progressChangeDevelopment) * 0.3)
+            }
+            availableAppList.append(actTemp)
         }
     }
     
@@ -320,32 +362,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return timeframeText[timeframe]
     }
     
-    //MARK: TABLE VIEW
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableAppList.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let index = indexPath.row
-        let cell = actionTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
-        cell.actionNameLabel.text = availableAppList[index].actionName
-        if availableAppList[index].isPickable == false {
-//            cell.isUserInteractionEnabled = false
-            cell.actionNameLabel.textColor = .red
-        } else {
-            cell.actionNameLabel.textColor = .black
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedApp = indexPath.row
-        updateActionStatsChange(selectedAction: availableAppList[selectedApp])
-    }
     
     //MARK: COLLECTION VIEW
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -357,9 +373,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = actionCollectionView.dequeueReusableCell(withReuseIdentifier: "actionItem", for: indexPath) as! ActionCollectionViewCell
         cell.actionNameLabel.text = availableAppList[index].actionName
         
-        if availableAppList[index].isPickable == false {
-//            cell.isUserInteractionEnabled = false
+        if !availableAppList[index].isPickable {
             cell.actionNameLabel.textColor = .red
+        } else {
+            cell.actionNameLabel.textColor = .black
+            actionActButton.setTitleColor(.white, for: .normal)
+        }
+        
+        if !availableAppList[index].isActive {
+            cell.actionNameLabel.textColor = .gray
         } else {
             cell.actionNameLabel.textColor = .black
         }
@@ -372,7 +394,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 128, height: 128)
+        return CGSize(width: 90, height: 90)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
