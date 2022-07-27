@@ -24,7 +24,9 @@ class UnlockableViewController: UIViewController {
         sceneGreetLabel.text = ""
         
         sceneTitleLabel.text = unlockedScene?.sceneName
+        sceneIdLabel.text = "#\(String(describing: unlockedScene?.sceneId))"
         sceneDescriptionTextView.text = unlockedScene?.sceneDescription
+        sceneDescriptionTextView.isUserInteractionEnabled = false
         
         // Do any additional setup after loading the view.
     }

@@ -47,28 +47,37 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     
     let statsList = ["Knowledge", "Social", "Sickness", "Stress"]
     
-    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 2, statsKnowledge: 20, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
+    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 2, statsKnowledge: 15, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
     var action: [Action] = [
-        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
-        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 0, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true,availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
-        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
-        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 5, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
-        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isPickable: true, isActive: true,availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
-        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 10, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
-        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isPickable: true, isActive: true,availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
-        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isPickable: true, isActive: true,availability: "1111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
-        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, isActive: true,availability: "1111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
-        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isPickable: true, isActive: true,availability: "1111", iconDefault: "Game", iconHighlight: "GameH"),
-        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isPickable: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
-        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isPickable: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
+        Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 2, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isOkay: true, isActive: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
+        Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 2, statsChangeSocial: -15, statsChangeSickness: 20, statsChangeStress: 20, isOkay: true, isActive: true,availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
+        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
+        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
+        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isOkay: true, isActive: true,availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
+        Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 7, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
+        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isOkay: true, isActive: true,availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
+        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
+        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "1111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
+        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "1111", iconDefault: "Game", iconHighlight: "GameH"),
+        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isOkay: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
+        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isOkay: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
     ]
-    var scene: [Scene] = [
-        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false)
+    var sceneList: [Scene] = [
+        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false),
+        Scene(sceneId: 2, sceneName: "Development Failed..", sceneDescription: "Everything went out smoothly.. maybe?", sceneImage: "Scene02", isUnlocked: false),
+        Scene(sceneId: 3, sceneName: "Smart Guy", sceneDescription: "You're always popular.. when it's near deadline.", sceneImage: "Scene0", isUnlocked: false),
+        Scene(sceneId: 4, sceneName: "NPC", sceneDescription: "You never socialize that people didn't even know you existed.", sceneImage: "Scene04", isUnlocked: false),
+        Scene(sceneId: 5, sceneName: "Stressed out", sceneDescription: "Couldn't handle the stress level, this person exploded.", sceneImage: "Scene05", isUnlocked: false),
+        Scene(sceneId: 6, sceneName: "VIP Patient", sceneDescription: "\"Ah, it's that person again!\", said the hospital manager.", sceneImage: "Scene06", isUnlocked: false)
     ]
     var selectedApp: Int = -1
     var availableAppList: [Action] = []
     var unlockedScene: Scene?
     var notesText: String = ""
+    
+    var antisocialCount: Int = 0
+    var stressCount: Int = 0
+    var sicknessCount: Int = 0
     
     
     override func viewDidLoad() {
@@ -91,7 +100,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         backButton.tintColor = .gray
         
         
-        desktopImageView.backgroundColor = .white
+        desktopImageView.backgroundColor = UIColor(named: "Desktop")
         headerView.backgroundColor = UIColor(named: "Window")
         developmentView.backgroundColor = UIColor(named: "Window")
         actionView.backgroundColor = UIColor(named: "Window")
@@ -106,6 +115,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         statusView.layer.borderWidth = 2
         notesView.layer.borderWidth = 2
 //        actionCollectionView.layer.borderWidth = 2
+        
+        headerView.layer.cornerRadius = 10
+        developmentView.layer.cornerRadius = 10
+        actionView.layer.cornerRadius = 10
+        statusView.layer.cornerRadius = 10
+        notesView.layer.cornerRadius = 10
 
     }
     
@@ -145,16 +160,17 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
     
     func doEnding(sceneNumber: Int){
-        if !scene[sceneNumber].isUnlocked {
-            unlockedScene = scene[sceneNumber]
-            scene[sceneNumber].isUnlocked = true
+        let sceneIndex = sceneNumber - 1
+        if !sceneList[sceneIndex].isUnlocked {
+            unlockedScene = sceneList[sceneIndex]
+            sceneList[sceneIndex].isUnlocked = true
             performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
         }
     }
     
     func checkState(){
         if player.progressDevelopment == 100 {
-            doEnding(sceneNumber: 0)
+            doEnding(sceneNumber: 1)
             notesText.append("Development has been finished! Congratulations!\n")
         }
         
@@ -171,13 +187,30 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         }
         if player.statsSocial < 15 {
             notesText.append("Social is too low! Don't be anti-social.\n")
+            antisocialCount += 1
         }
         if player.statsSickness > 80 {
             notesText.append("Sickness is too high! Have a proper rest.\n")
+            sicknessCount += 1
         }
         if player.statsStress > 80 {
             notesText.append("Stress is too high! Touch grass.\n")
+            stressCount += 1
         }
+        
+        if player.statsKnowledge == 100 {
+            doEnding(sceneNumber: 3)
+        }
+        if antisocialCount > 4 {
+            doEnding(sceneNumber: 4)
+        }
+        if sicknessCount > 4 {
+            doEnding(sceneNumber: 5)
+        }
+        if stressCount > 4 {
+            doEnding(sceneNumber: 6)
+        }
+        
         
     }
     
@@ -249,7 +282,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         actionSicknessChangeLabel.text = selectedAction.statsChangeSickness > 0 ? "+\(selectedAction.statsChangeSickness)" : "\(selectedAction.statsChangeSickness)"
         actionStressChangeLabel.text = selectedAction.statsChangeStress > 0 ? "+\(selectedAction.statsChangeStress)" : "\(selectedAction.statsChangeStress)"
         
-        if !selectedAction.isPickable {
+        if !selectedAction.isOkay {
             actionDevelopmentChangeLabel.textColor = .red
             actionSelectedAppLabel.textColor = .red
 //            actionActButton.setTitleColor(.red, for: .normal)
@@ -270,6 +303,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             actionActButton.tintColor = .black
             actionActButton.isUserInteractionEnabled = true
         }
+        
+        
             
     }
     
@@ -310,12 +345,11 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             } else {
                 actTemp.isActive = false
             }
-            
-            actTemp.isPickable = checkPlayerCondition(act: act)
             if actTemp.progressChangeDevelopment > 0 {
+                actTemp.isOkay = checkPlayerCondition(act: act)
                 actTemp.progressChangeDevelopment += player.statsKnowledge/20
             }
-            if !actTemp.isPickable {
+            if !actTemp.isOkay {
                 actTemp.progressChangeDevelopment = Int(Double(actTemp.progressChangeDevelopment) * 0.3)
             }
             availableAppList.append(actTemp)
@@ -373,28 +407,40 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let cell = actionCollectionView.dequeueReusableCell(withReuseIdentifier: "actionItem", for: indexPath) as! ActionCollectionViewCell
         cell.actionNameLabel.text = availableAppList[index].actionName
         
-        if !availableAppList[index].isPickable {
-            cell.actionNameLabel.textColor = .red
-            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.red, renderingMode: .alwaysOriginal)
-        } else {
-            cell.actionNameLabel.textColor = .black
-            actionActButton.setTitleColor(.white, for: .normal)
-            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        }
+//        if !availableAppList[index].isPickable {
+//            cell.actionNameLabel.textColor = .red
+//            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.red, renderingMode: .alwaysOriginal)
+//        } else {
+//            cell.actionNameLabel.textColor = .black
+//            actionActButton.setTitleColor(.white, for: .normal)
+//            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+//        }
+        
+        cell.actionIconImageView.image = UIImage(named: availableAppList[index].iconDefault)
         
         if !availableAppList[index].isActive {
             cell.actionNameLabel.textColor = .gray
-            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app.dashed")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
+            cell.actionIconImageView.layer.opacity = 0.3
+        } else if !availableAppList[index].isOkay{
+            cell.actionNameLabel.textColor = .red
+            cell.actionIconImageView.layer.opacity = 1
         } else {
             cell.actionNameLabel.textColor = .black
-            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+            cell.actionIconImageView.layer.opacity = 1
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedApp = indexPath.row
+        let cell = actionCollectionView.cellForItem(at: indexPath) as! ActionCollectionViewCell
+        cell.actionIconImageView.image = UIImage(named: availableAppList[selectedApp].iconHighlight)
         updateActionStatsChange(selectedAction: availableAppList[selectedApp])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = actionCollectionView.cellForItem(at: indexPath) as! ActionCollectionViewCell
+        cell.actionIconImageView.image = UIImage(named: availableAppList[selectedApp].iconDefault)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
