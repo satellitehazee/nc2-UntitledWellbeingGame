@@ -58,16 +58,16 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     var action: [Action] = [
         Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 2, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isOkay: true, isActive: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
         Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 2, statsChangeSocial: -15, statsChangeSickness: 20, statsChangeStress: 20, isOkay: true, isActive: true,availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
-        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 10, statsChangeSickness: 5, statsChangeStress: 10, isOkay: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
-        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 10, statsChangeSickness: 5, statsChangeStress: 10, isOkay: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
-        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isOkay: true, isActive: true,availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
+        Action(actionName: "Notion", progressChangeDevelopment: 5, statsChangeKnowledge: 3, statsChangeSocial: 5, statsChangeSickness: 10, statsChangeStress: 10, isOkay: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
+        Action(actionName: "Miro", progressChangeDevelopment: 5, statsChangeKnowledge: 3, statsChangeSocial: 5, statsChangeSickness: 10, statsChangeStress: 10, isOkay: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
+        Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 5, statsChangeSickness: 20, statsChangeStress: 25, isOkay: true, isActive: true,availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
         Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 7, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
-        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isOkay: true, isActive: true,availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
-        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "0111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
+        Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 2, statsChangeStress: 3, isOkay: true, isActive: true,availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
+        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 2, statsChangeStress: 3, isOkay: true, isActive: true,availability: "0111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
         Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "0111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
-        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "0111", iconDefault: "Game", iconHighlight: "GameH"),
-        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isOkay: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
-        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isOkay: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
+        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 3, statsChangeStress: -15, isOkay: true, isActive: true,availability: "0111", iconDefault: "Game", iconHighlight: "GameH"),
+        Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -3, statsChangeSickness: -15, statsChangeStress: -15, isOkay: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
+        Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -3, statsChangeSickness: -30, statsChangeStress: -30, isOkay: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
     ]
     var sceneList: [Scene] = [
         Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false),
@@ -183,7 +183,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         } else {
             actionActButton.isUserInteractionEnabled = false
             actionActButton.tintColor = .gray
-            actionSelectedAppLabel.text = ""
+            actionSelectedAppLabel.text = "Finished!"
             actionSelectedAppIconImageView.image = .none
             doEnding(sceneNumber: 2)
         }
