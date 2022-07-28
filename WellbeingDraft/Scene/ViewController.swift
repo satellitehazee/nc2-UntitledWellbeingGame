@@ -19,8 +19,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     @IBOutlet weak var notesView: UIView!
     @IBOutlet weak var desktopImageView: UIImageView!
     
-    @IBOutlet weak var headerTitle: UILabel!
-    @IBOutlet weak var headerTimeIndicator: UILabel!
+    @IBOutlet weak var headerDayCount: UILabel!
+    @IBOutlet weak var headerTimeframe: UILabel!
+    @IBOutlet weak var timeframeMorningView: UIView!
+    @IBOutlet weak var timeframeNoonView: UIView!
+    @IBOutlet weak var timeframeDuskView: UIView!
+    @IBOutlet weak var timeframeNightView: UIView!
     
     @IBOutlet weak var backButton: UIButton!
     
@@ -34,9 +38,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var notesTextView: UITextView!
     
+    @IBOutlet weak var actionHeaderLabel: UILabel!
     @IBOutlet weak var actionCollectionView: UICollectionView!
+    @IBOutlet weak var actionSelectedAppIconImageView: UIImageView!
     @IBOutlet weak var actionSelectedAppLabel: UILabel!
     @IBOutlet weak var actionActButton: UIButton!
+    @IBOutlet weak var actionStatsChangeView: UIView!
     
     @IBOutlet weak var actionDevelopmentChangeLabel: UILabel!
     @IBOutlet weak var actionKnowledgeChangeLabel: UILabel!
@@ -47,25 +54,25 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     
     let statsList = ["Knowledge", "Social", "Sickness", "Stress"]
     
-    var player: Player = Player(currentDay: 1, currentTimeframe: 0, progressDevelopment: 2, statsKnowledge: 15, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
+    var player: Player = Player(currentDay: 1, finishDay: 7, currentTimeframe: 0, progressDevelopment: 8, statsKnowledge: 15, statsSocial: 50, statsSickness: 30, statsStress: 25, statsUpperLimit: 100, statsBottomLimit: 0)
     var action: [Action] = [
         Action(actionName: "Xcode", progressChangeDevelopment: 10, statsChangeKnowledge: 2, statsChangeSocial: -15, statsChangeSickness: 15, statsChangeStress: 25, isOkay: true, isActive: true, availability: "1111", iconDefault: "Xcode", iconHighlight: "XcodeH"),
         Action(actionName: "Sketch", progressChangeDevelopment: 10, statsChangeKnowledge: 2, statsChangeSocial: -15, statsChangeSickness: 20, statsChangeStress: 20, isOkay: true, isActive: true,availability: "1111", iconDefault: "Sketch", iconHighlight: "SketchH"),
-        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
-        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 5, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
+        Action(actionName: "Notion", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 10, statsChangeSickness: 5, statsChangeStress: 10, isOkay: true, isActive: true,availability: "1111", iconDefault: "Notion", iconHighlight: "NotionH"),
+        Action(actionName: "Miro", progressChangeDevelopment: 2, statsChangeKnowledge: 3, statsChangeSocial: 10, statsChangeSickness: 5, statsChangeStress: 10, isOkay: true, isActive: true,availability: "1111", iconDefault: "Miro", iconHighlight: "MiroH"),
         Action(actionName: "Zoom", progressChangeDevelopment: 2, statsChangeKnowledge: 15, statsChangeSocial: 10, statsChangeSickness: 15, statsChangeStress: 25, isOkay: true, isActive: true,availability: "1000", iconDefault: "Zoom", iconHighlight: "ZoomH"),
         Action(actionName: "Safari", progressChangeDevelopment: 0, statsChangeKnowledge: 7, statsChangeSocial: -10, statsChangeSickness: 10, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Safari", iconHighlight: "SafariH"),
         Action(actionName: "Discord", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: -5, isOkay: true, isActive: true,availability: "0111", iconDefault: "Discord", iconHighlight: "DiscordH"),
-        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "1111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
-        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "1111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
-        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "1111", iconDefault: "Game", iconHighlight: "GameH"),
+        Action(actionName: "Instagram", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 15, statsChangeSickness: 5, statsChangeStress: 5, isOkay: true, isActive: true,availability: "0111", iconDefault: "Instagram", iconHighlight: "InstagramH"),
+        Action(actionName: "Netflix", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 0, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "0111", iconDefault: "Netflix", iconHighlight: "NetflixH"),
+        Action(actionName: "Game", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: 5, statsChangeSickness: 0, statsChangeStress: -15, isOkay: true, isActive: true,availability: "0111", iconDefault: "Game", iconHighlight: "GameH"),
         Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -10, statsChangeStress: -10, isOkay: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
         Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -5, statsChangeSickness: -30, statsChangeStress: -30, isOkay: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
     ]
     var sceneList: [Scene] = [
         Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false),
-        Scene(sceneId: 2, sceneName: "Development Failed..", sceneDescription: "Everything went out smoothly.. maybe?", sceneImage: "Scene02", isUnlocked: false),
-        Scene(sceneId: 3, sceneName: "Smart Guy", sceneDescription: "You're always popular.. when it's near deadline.", sceneImage: "Scene0", isUnlocked: false),
+        Scene(sceneId: 2, sceneName: "Presentation", sceneDescription: "You finally presented your app to everyone in the Academy.\nThank you for playing the game!", sceneImage: "Scene02", isUnlocked: false),
+        Scene(sceneId: 3, sceneName: "Smart Guy", sceneDescription: "You're always popular.. when it's near deadline.", sceneImage: "Scene03", isUnlocked: false),
         Scene(sceneId: 4, sceneName: "NPC", sceneDescription: "You never socialize that people didn't even know you existed.", sceneImage: "Scene04", isUnlocked: false),
         Scene(sceneId: 5, sceneName: "Stressed out", sceneDescription: "Couldn't handle the stress level, this person exploded.", sceneImage: "Scene05", isUnlocked: false),
         Scene(sceneId: 6, sceneName: "VIP Patient", sceneDescription: "\"Ah, it's that person again!\", said the hospital manager.", sceneImage: "Scene06", isUnlocked: false)
@@ -79,6 +86,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     var stressCount: Int = 0
     var sicknessCount: Int = 0
     
+    var endGame: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +129,16 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         actionView.layer.cornerRadius = 10
         statusView.layer.cornerRadius = 10
         notesView.layer.cornerRadius = 10
+        
+        timeframeMorningView.layer.cornerRadius = 3
+        timeframeNoonView.layer.cornerRadius = 3
+        timeframeDuskView.layer.cornerRadius = 3
+        timeframeNightView.layer.cornerRadius = 3
+        
+        timeframeMorningView.backgroundColor = .white
+        timeframeNoonView.backgroundColor = .white
+        timeframeDuskView.backgroundColor = .white
+        timeframeNightView.backgroundColor = .white
 
     }
     
@@ -132,6 +150,9 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         updateNotes()
         updateColorTimeframe()
         actionCollectionView.reloadData()
+        if endGame {
+            finishGame()
+        }
     }
     
     @IBAction func backToMenu(_ sender: Any) {
@@ -156,7 +177,17 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             
             appendLog()
         }
-        refreshScreenState()
+        
+        if !endGame {
+            refreshScreenState()
+        } else {
+            actionActButton.isUserInteractionEnabled = false
+            actionActButton.tintColor = .gray
+            actionSelectedAppLabel.text = ""
+            actionSelectedAppIconImageView.image = .none
+            doEnding(sceneNumber: 2)
+        }
+        
     }
     
     func doEnding(sceneNumber: Int){
@@ -168,10 +199,22 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         }
     }
     
+    func finishGame(){
+        actionHeaderLabel.text = ""
+        actionActButton.tintColor = .black
+        actionActButton.setTitle("Present →", for: .normal)
+        actionActButton.isUserInteractionEnabled = true
+        actionCollectionView.isUserInteractionEnabled = false
+        actionStatsChangeView.layer.opacity = 0
+        actionSelectedAppLabel.text = "Presentation"
+    }
+    
     func checkState(){
-        if player.progressDevelopment == 100 {
-            doEnding(sceneNumber: 1)
-            notesText.append("Development has been finished! Congratulations!\n")
+        var endingNum = -1
+        
+        if player.progressDevelopment == 100 && !sceneList[0].isUnlocked {
+            endingNum = 1
+            notesText.append("Development has been finished!\n You may continue development until final day.\n")
         }
         
         if player.currentDay == 1 {
@@ -182,9 +225,10 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         if player.currentDay == 4 {
             notesText.append("3 days left until deadline..\n")
         }
-        if player.currentDay == 7 {
+        if player.currentDay == player.finishDay {
             notesText.append("Almost there! Make sure to finish your development!\n")
         }
+        
         if player.statsSocial < 15 {
             notesText.append("Social is too low! Don't be anti-social.\n")
             antisocialCount += 1
@@ -194,23 +238,32 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             sicknessCount += 1
         }
         if player.statsStress > 80 {
-            notesText.append("Stress is too high! Touch grass.\n")
+            notesText.append("Stress is too high! Don't push yourself.\n")
             stressCount += 1
         }
         
-        if player.statsKnowledge == 100 {
-            doEnding(sceneNumber: 3)
+        if player.statsKnowledge == 100 && !sceneList[2].isUnlocked{
+            endingNum = 3
         }
-        if antisocialCount > 4 {
-            doEnding(sceneNumber: 4)
+        if antisocialCount > 4 && !sceneList[3].isUnlocked{
+            endingNum = 4
         }
-        if sicknessCount > 4 {
-            doEnding(sceneNumber: 5)
+        if sicknessCount > 4 && !sceneList[4].isUnlocked{
+            endingNum = 5
         }
-        if stressCount > 4 {
-            doEnding(sceneNumber: 6)
+        if stressCount > 4 && !sceneList[5].isUnlocked{
+            endingNum = 6
         }
         
+        if player.currentDay > player.finishDay {
+            endGame = true
+            notesText = "You have finished your sprint.\nIt's time to present your app!"
+        }
+        
+        
+        if endingNum != -1 && !endGame{
+            doEnding(sceneNumber: endingNum)
+        }
         
     }
     
@@ -263,6 +316,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         selectedApp = -1
         actionSelectedAppLabel.text = "-"
         actionSelectedAppLabel.textColor = .black
+        actionSelectedAppIconImageView.image = UIImage(systemName: "app.dashed")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+//        actionSelectedAppIconImageView.image = UIImage(named: "PlaceholderIcon")
         actionDevelopmentChangeLabel.textColor = .black
         actionDevelopmentChangeLabel.text = "N/A"
         actionKnowledgeChangeLabel.text = "N/A"
@@ -276,6 +331,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     
     func updateActionStatsChange(selectedAction: Action){
         actionSelectedAppLabel.text = selectedAction.actionName
+        actionSelectedAppIconImageView.image = UIImage(named: selectedAction.iconDefault)
         actionDevelopmentChangeLabel.text = selectedAction.progressChangeDevelopment > 0 ? "+\(selectedAction.progressChangeDevelopment)" : "\(selectedAction.progressChangeDevelopment)"
         actionKnowledgeChangeLabel.text = selectedAction.statsChangeKnowledge > 0 ? "+\(selectedAction.statsChangeKnowledge)" : "\(selectedAction.statsChangeKnowledge)"
         actionSocialChangeLabel.text = selectedAction.statsChangeSocial > 0 ? "+\(selectedAction.statsChangeSocial)" : "\(selectedAction.statsChangeSocial)"
@@ -297,27 +353,49 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         }
         
         if !selectedAction.isActive {
+            actionSelectedAppIconImageView.layer.opacity = 0.3
+            actionStatsChangeView.layer.opacity = 0.3
+            actionSelectedAppLabel.textColor = .gray
             actionActButton.tintColor = .gray
             actionActButton.isUserInteractionEnabled = false
         } else {
+            actionSelectedAppIconImageView.layer.opacity = 1
+            actionStatsChangeView.layer.opacity = 1
+            actionSelectedAppLabel.textColor = .black
             actionActButton.tintColor = .black
             actionActButton.isUserInteractionEnabled = true
         }
-        
         
             
     }
     
     func updateColorTimeframe(){
         let timeframeColor = ["BGMorning2", "BGNoon2", "BGDusk2", "BGNight2"]
-        UIView.animate(withDuration: 0.5){
+        let timeframeView = [timeframeMorningView, timeframeNoonView, timeframeDuskView, timeframeNightView]
+        UIView.animate(withDuration: 0.5){ [self] in
 //            self.headerView.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
             self.view.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
+            for i in 0...3{
+                if i == self.player.currentTimeframe {
+                    timeframeView[player.currentTimeframe]?.backgroundColor = UIColor(named: timeframeColor[self.player.currentTimeframe])
+                } else {
+                    timeframeView[i]?.backgroundColor = .white
+                }
+            }
+            
         }
     }
     
     func updateBar(){
-        headerTimeIndicator.text = "Day \(player.currentDay) - \(timeframeIntToText(timeframe: player.currentTimeframe))"
+        if player.currentDay < player.finishDay {
+            headerDayCount.text = "Day \(player.currentDay) / \(player.finishDay)"
+        } else if player.currentDay == player.finishDay {
+            headerDayCount.text = "Final day!"
+        } else {
+            headerDayCount.text = "Presentation day!"
+        }
+        
+        headerTimeframe.text = "\(timeframeIntToText(timeframe: player.currentTimeframe))"
         
         developmentProgressView.setProgress(Float(player.progressDevelopment)/Float(player.statsUpperLimit), animated: true)
         knowledgeProgressView.setProgress(Float(player.statsKnowledge)/Float(player.statsUpperLimit), animated: true)
@@ -326,14 +404,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         stressProgressView.setProgress(Float(player.statsStress)/Float(player.statsUpperLimit), animated: true)
     }
     
-    func updateBarNumber(){
-//        progressBarDevelopment.text = "\(player.progressDevelopment) / \(player.statsUpperLimit)"
-//        statsBarKnowledge.text = "\(player.statsKnowledge) / \(player.statsUpperLimit)"
-//        statsBarSocial.text = "\(player.statsSocial) / \(player.statsUpperLimit)"
-//        statsBarSickness.text = "\(player.statsSickness) / \(player.statsUpperLimit)"
-//        statsBarStress.text = "\(player.statsStress) / \(player.statsUpperLimit)"
-        headerTimeIndicator.text = "Day \(player.currentDay) - \(timeframeIntToText(timeframe: player.currentTimeframe))"
-    }
     
     func checkAvailableApp(){
         availableAppList.removeAll()
@@ -367,14 +437,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             return true
         }
     }
-//    func barIntToText(progress: Int) -> String{
-//        var progressText = ""
-//        let progressConvert = max(0, progress/5)
-//        for _ in 0...progressConvert {
-//            progressText.append("#")
-//        }
-//        return progressText
-//    }
+
     
     func changeIntToText(change: Int) -> String{
         var changeText = ""
@@ -407,16 +470,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let cell = actionCollectionView.dequeueReusableCell(withReuseIdentifier: "actionItem", for: indexPath) as! ActionCollectionViewCell
         cell.actionNameLabel.text = availableAppList[index].actionName
         
-//        if !availableAppList[index].isPickable {
-//            cell.actionNameLabel.textColor = .red
-//            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.red, renderingMode: .alwaysOriginal)
-//        } else {
-//            cell.actionNameLabel.textColor = .black
-//            actionActButton.setTitleColor(.white, for: .normal)
-//            cell.actionIconImageView.image = UIImage(systemName: "questionmark.app")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-//        }
-        
         cell.actionIconImageView.image = UIImage(named: availableAppList[index].iconDefault)
+        cell.layer.borderWidth = 0
         
         if !availableAppList[index].isActive {
             cell.actionNameLabel.textColor = .gray
@@ -428,6 +483,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             cell.actionNameLabel.textColor = .black
             cell.actionIconImageView.layer.opacity = 1
         }
+        
+        if endGame {
+            cell.actionNameLabel.textColor = .gray
+            cell.actionIconImageView.layer.opacity = 0.3
+        }
+        
         return cell
     }
     
@@ -435,12 +496,14 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         selectedApp = indexPath.row
         let cell = actionCollectionView.cellForItem(at: indexPath) as! ActionCollectionViewCell
         cell.actionIconImageView.image = UIImage(named: availableAppList[selectedApp].iconHighlight)
+        cell.layer.borderWidth = 1
         updateActionStatsChange(selectedAction: availableAppList[selectedApp])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = actionCollectionView.cellForItem(at: indexPath) as! ActionCollectionViewCell
         cell.actionIconImageView.image = UIImage(named: availableAppList[selectedApp].iconDefault)
+        cell.layer.borderWidth = 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
