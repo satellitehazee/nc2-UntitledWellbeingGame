@@ -13,22 +13,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var galleryTitleLabel: UILabel!
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
-    var scene: [Scene] = [
-        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false),
-        Scene(sceneId: 2, sceneName: "Presentation", sceneDescription: "You finally presented your app to everyone in the Academy.\nThank you for playing the game!", sceneImage: "Scene02", isUnlocked: false),
-        Scene(sceneId: 3, sceneName: "Smart Guy", sceneDescription: "You're always popular.. when it's near deadline.", sceneImage: "Scene03", isUnlocked: false),
-        Scene(sceneId: 4, sceneName: "NPC", sceneDescription: "You never socialize that people didn't even know you existed.", sceneImage: "Scene04", isUnlocked: false),
-        Scene(sceneId: 5, sceneName: "Stressed out", sceneDescription: "Couldn't handle the stress level, this person exploded.", sceneImage: "Scene05", isUnlocked: false),
-        Scene(sceneId: 6, sceneName: "VIP Patient", sceneDescription: "\"Ah, it's that person again!\", said the hospital manager.", sceneImage: "Scene06", isUnlocked: false)
-    ]
+    var scene: [Scene]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
-        print (scene.count)
-        print (scene[0].sceneDescription)
         
     }
     
@@ -41,7 +32,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "sceneItem", for: indexPath) as! SceneCollectionViewCell
         cell.sceneTitleLabel.text = "#\(scene[indexPath.row].sceneId): \(scene[index].sceneName)"
         if scene[index].isUnlocked {
-            cell.sceneImageView.image = UIImage(systemName: "questionmark.app.fill")
+            cell.sceneImageView.image = UIImage(named: scene[index].sceneImage)
             cell.sceneDescriptionTextView.text = scene[index].sceneDescription
         } else {
             cell.sceneImageView.image = UIImage(systemName: "lock.fill")

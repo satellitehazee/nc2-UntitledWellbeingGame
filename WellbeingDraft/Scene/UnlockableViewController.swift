@@ -21,12 +21,13 @@ class UnlockableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sceneGreetLabel.text = ""
+//        sceneGreetLabel.text = ""
         
         sceneTitleLabel.text = unlockedScene?.sceneName
         sceneIdLabel.text = "#\(unlockedScene!.sceneId)"
         sceneDescriptionTextView.text = unlockedScene?.sceneDescription
         sceneDescriptionTextView.isUserInteractionEnabled = false
+        sceneImageView.image = UIImage(named: unlockedScene!.sceneImage)
         
         // Do any additional setup after loading the view.
     }

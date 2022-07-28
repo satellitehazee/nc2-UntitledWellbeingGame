@@ -35,7 +35,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     
     @IBOutlet weak var developmentProgressView: UIProgressView!
     
-    @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var notesTextView: UITextView!
     
     @IBOutlet weak var actionHeaderLabel: UILabel!
@@ -69,18 +68,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         Action(actionName: "Nap", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -3, statsChangeSickness: -15, statsChangeStress: -15, isOkay: true, isActive: true,availability: "1110", iconDefault: "Nap", iconHighlight: "NapH"),
         Action(actionName: "Sleep", progressChangeDevelopment: 0, statsChangeKnowledge: 0, statsChangeSocial: -3, statsChangeSickness: -30, statsChangeStress: -30, isOkay: true, isActive: true,availability: "0001", iconDefault: "Sleep", iconHighlight: "SleepH")
     ]
-    var sceneList: [Scene] = [
-        Scene(sceneId: 1, sceneName: "Development Success!", sceneDescription: "Everything went out smoothly; Development finished on time, and you're living well.", sceneImage: "Scene01", isUnlocked: false),
-        Scene(sceneId: 2, sceneName: "Presentation", sceneDescription: "You finally presented your app to everyone in the Academy.\nThank you for playing the game!", sceneImage: "Scene02", isUnlocked: false),
-        Scene(sceneId: 3, sceneName: "Smart Guy", sceneDescription: "You're always popular.. when it's near deadline.", sceneImage: "Scene03", isUnlocked: false),
-        Scene(sceneId: 4, sceneName: "NPC", sceneDescription: "You never socialize that people didn't even know you existed.", sceneImage: "Scene04", isUnlocked: false),
-        Scene(sceneId: 5, sceneName: "Stressed out", sceneDescription: "Couldn't handle the stress level, this person exploded.", sceneImage: "Scene05", isUnlocked: false),
-        Scene(sceneId: 6, sceneName: "VIP Patient", sceneDescription: "\"Ah, it's that person again!\", said the hospital manager.", sceneImage: "Scene06", isUnlocked: false)
-    ]
+    var sceneList: [Scene]!
     var selectedApp: Int = -1
     var availableAppList: [Action] = []
     var unlockedScene: Scene?
     var notesText: String = ""
+    var delegate: UpdateGalleryEnding?
     
     var antisocialCount: Int = 0
     var stressCount: Int = 0
@@ -94,7 +87,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         refreshScreenState()
         actionCollectionView.delegate = self
         actionCollectionView.dataSource = self
-        logTextView.text = "Untitled Wellbeing Game.\n"
         // Do any additional setup after loading the view.
     }
     
@@ -104,6 +96,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         socialProgressView.transform = socialProgressView.transform.scaledBy(x: 1, y: 10)
         sicknessProgressView.transform = sicknessProgressView.transform.scaledBy(x: 1, y: 10)
         stressProgressView.transform = stressProgressView.transform.scaledBy(x: 1, y: 10)
+        
         actionActButton.tintColor = .black
         backButton.tintColor = .gray
         
@@ -116,29 +109,46 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         notesView.backgroundColor = UIColor(named: "Window")
 //        actionCollectionView.backgroundColor = UIColor(named: "Window")
         actionCollectionView.backgroundColor = .none
+        
+        headerView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        developmentView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        actionView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        statusView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        notesView.layer.borderColor = UIColor(named: "Accent")?.cgColor
 
         headerView.layer.borderWidth = 2
         developmentView.layer.borderWidth = 2
         actionView.layer.borderWidth = 2
         statusView.layer.borderWidth = 2
         notesView.layer.borderWidth = 2
+        
 //        actionCollectionView.layer.borderWidth = 2
         
-        headerView.layer.cornerRadius = 10
-        developmentView.layer.cornerRadius = 10
-        actionView.layer.cornerRadius = 10
-        statusView.layer.cornerRadius = 10
-        notesView.layer.cornerRadius = 10
-        
-        timeframeMorningView.layer.cornerRadius = 3
-        timeframeNoonView.layer.cornerRadius = 3
-        timeframeDuskView.layer.cornerRadius = 3
-        timeframeNightView.layer.cornerRadius = 3
+//        headerView.layer.cornerRadius = 10
+//        developmentView.layer.cornerRadius = 10
+//        actionView.layer.cornerRadius = 10
+//        statusView.layer.cornerRadius = 10
+//        notesView.layer.cornerRadius = 10
+//
+//        timeframeMorningView.layer.cornerRadius = 3
+//        timeframeNoonView.layer.cornerRadius = 3
+//        timeframeDuskView.layer.cornerRadius = 3
+//        timeframeNightView.layer.cornerRadius = 3
         
         timeframeMorningView.backgroundColor = .white
         timeframeNoonView.backgroundColor = .white
         timeframeDuskView.backgroundColor = .white
         timeframeNightView.backgroundColor = .white
+        
+        timeframeMorningView.layer.borderWidth = 1
+        timeframeNoonView.layer.borderWidth = 1
+        timeframeDuskView.layer.borderWidth = 1
+        timeframeNightView.layer.borderWidth = 1
+        
+        timeframeMorningView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        timeframeNoonView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        timeframeDuskView.layer.borderColor = UIColor(named: "Accent")?.cgColor
+        timeframeNightView.layer.borderColor = UIColor(named: "Accent")?.cgColor
 
     }
     
@@ -175,7 +185,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
                 player.currentDay += 1
             }
             
-            appendLog()
+//            appendLog()
         }
         
         if !endGame {
@@ -194,7 +204,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let sceneIndex = sceneNumber - 1
         if !sceneList[sceneIndex].isUnlocked {
             unlockedScene = sceneList[sceneIndex]
-            sceneList[sceneIndex].isUnlocked = true
+//            sceneList[sceneIndex].isUnlocked = true
+            delegate?.unlock(sceneNumber: sceneNumber)
             performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
         }
     }
@@ -202,11 +213,14 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func finishGame(){
         actionHeaderLabel.text = ""
         actionActButton.tintColor = .black
-        actionActButton.setTitle("Present →", for: .normal)
+//        actionActButton.setTitle("Present →", for: .normal)
+//        actionActButton.titleLabel?.font = UIFont(name: "zpix", size: 24)
+        
         actionActButton.isUserInteractionEnabled = true
         actionCollectionView.isUserInteractionEnabled = false
         actionStatsChangeView.layer.opacity = 0
         actionSelectedAppLabel.text = "Presentation"
+        actionSelectedAppIconImageView.image = UIImage(named: "Keynote")
     }
     
     func checkState(){
@@ -272,32 +286,32 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         notesText = ""
     }
     
-    func appendLog(){
-        logTextView.text.append("\nYou've done \(availableAppList[selectedApp].actionName).")
-        if availableAppList[selectedApp].progressChangeDevelopment != 0 {
-            logTextView.text.append(" Development increased by \(availableAppList[selectedApp].progressChangeDevelopment)")
-        }
-        
-        let changes = [availableAppList[selectedApp].statsChangeKnowledge, availableAppList[selectedApp].statsChangeSocial, availableAppList[selectedApp].statsChangeSickness, availableAppList[selectedApp].statsChangeStress]
-        
-        for i in 0...3{
-            if changes[i] != 0 {
-                if changes[i] > 0 {
-                    logTextView.text.append("\n\(statsList[i]) increased by \(changes[i]).")
-                } else {
-                    logTextView.text.append("\n\(statsList[i]) decreased by \(changes[i] * -1).")
-                }
-                
-            } else {
-                logTextView.text.append("\nNo changes to \(statsList[i]).")
-            }
-        }
-        
-        logTextView.text.append("\nIt's now \(timeframeIntToText(timeframe: player.currentTimeframe)).")
-        
-        logTextView.scrollRangeToVisible(NSMakeRange(logTextView.text.count, 1))
-    }
-    
+//    func appendLog(){
+//        logTextView.text.append("\nYou've done \(availableAppList[selectedApp].actionName).")
+//        if availableAppList[selectedApp].progressChangeDevelopment != 0 {
+//            logTextView.text.append(" Development increased by \(availableAppList[selectedApp].progressChangeDevelopment)")
+//        }
+//
+//        let changes = [availableAppList[selectedApp].statsChangeKnowledge, availableAppList[selectedApp].statsChangeSocial, availableAppList[selectedApp].statsChangeSickness, availableAppList[selectedApp].statsChangeStress]
+//
+//        for i in 0...3{
+//            if changes[i] != 0 {
+//                if changes[i] > 0 {
+//                    logTextView.text.append("\n\(statsList[i]) increased by \(changes[i]).")
+//                } else {
+//                    logTextView.text.append("\n\(statsList[i]) decreased by \(changes[i] * -1).")
+//                }
+//
+//            } else {
+//                logTextView.text.append("\nNo changes to \(statsList[i]).")
+//            }
+//        }
+//
+//        logTextView.text.append("\nIt's now \(timeframeIntToText(timeframe: player.currentTimeframe)).")
+//
+//        logTextView.scrollRangeToVisible(NSMakeRange(logTextView.text.count, 1))
+//    }
+//
     func limitStatChanges(){
         player.progressDevelopment = min(player.statsUpperLimit, player.progressDevelopment)
         player.statsKnowledge = min(player.statsUpperLimit, player.statsKnowledge)
@@ -316,7 +330,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         selectedApp = -1
         actionSelectedAppLabel.text = "-"
         actionSelectedAppLabel.textColor = .black
-        actionSelectedAppIconImageView.image = UIImage(systemName: "app.dashed")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        actionSelectedAppIconImageView.image = UIImage(named: "Unselected")
 //        actionSelectedAppIconImageView.image = UIImage(named: "PlaceholderIcon")
         actionDevelopmentChangeLabel.textColor = .black
         actionDevelopmentChangeLabel.text = "N/A"
@@ -455,7 +469,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
     
     func timeframeIntToText(timeframe: Int) -> String{
-        let timeframeText = ["Morning 🌄", "Noon ☀️", "Dusk 🌇", "Night 🌙"]
+//        let timeframeText = ["Morning 🌄", "Noon ☀️", "Dusk 🌇", "Night 🌙"]
+        let timeframeText = ["Morning", "Noon", "Dusk", "Night"]
         return timeframeText[timeframe]
     }
     
@@ -508,6 +523,11 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 90, height: 90)
+    }
+    
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
