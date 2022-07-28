@@ -204,7 +204,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let sceneIndex = sceneNumber - 1
         if !sceneList[sceneIndex].isUnlocked {
             unlockedScene = sceneList[sceneIndex]
-//            sceneList[sceneIndex].isUnlocked = true
+            sceneList[sceneIndex].isUnlocked = true
             delegate?.unlock(sceneNumber: sceneNumber)
             performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
         }
