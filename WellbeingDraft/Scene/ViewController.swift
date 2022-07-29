@@ -514,6 +514,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         selectedApp = indexPath.row
         let cell = actionCollectionView.cellForItem(at: indexPath) as! ActionCollectionViewCell
         cell.actionIconImageView.image = UIImage(named: availableAppList[selectedApp].iconHighlight)
+        cell.layer.borderColor = UIColor(named: "Accent")?.cgColor
         cell.layer.borderWidth = 1
         updateActionStatsChange(selectedAction: availableAppList[selectedApp])
     }
