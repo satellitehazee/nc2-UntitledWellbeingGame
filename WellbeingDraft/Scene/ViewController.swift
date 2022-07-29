@@ -90,6 +90,10 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.passScene(newSceneList: sceneList)
+    }
+    
     func initDesign(){
         developmentProgressView.transform = developmentProgressView.transform.scaledBy(x: 1, y: 18)
         knowledgeProgressView.transform = knowledgeProgressView.transform.scaledBy(x: 1, y: 10)
@@ -205,7 +209,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         if !sceneList[sceneIndex].isUnlocked {
             unlockedScene = sceneList[sceneIndex]
             sceneList[sceneIndex].isUnlocked = true
-            delegate?.unlock(sceneNumber: sceneNumber)
             performSegue(withIdentifier: "gotoCutsceneSegue", sender: self)
         }
     }
