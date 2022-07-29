@@ -199,7 +199,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             actionActButton.tintColor = .gray
             actionSelectedAppLabel.text = "Finished!"
             actionSelectedAppIconImageView.image = .none
-            doEnding(sceneNumber: 2)
+            doEnding(sceneNumber: 1)
         }
         
     }
@@ -230,7 +230,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         var endingNum = -1
         
         if player.progressDevelopment == 100 && !sceneList[0].isUnlocked {
-            endingNum = 1
+            endingNum = 2
             notesText.append("Development has been finished!\n You may continue development until final day.\n")
         }
         
